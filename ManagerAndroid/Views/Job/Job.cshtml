@@ -1,0 +1,67 @@
+﻿@model ManagerAndroid.Models.JobViewModel
+
+@{
+    ViewBag.Title = Model.Job.Name;
+}
+
+<br />
+
+<form asp-controller="Job" asp-action="Index">
+    <div class="form-group">
+        <input type="submit" class="btn btn-default" value="Back" />
+    </div>
+</form>
+
+<br />
+<br />
+
+<h2>Job @Model.Job.Name</h2>
+<div>
+    <dl class="dl-horizontal">
+        <dt>Description</dt>
+        <dd>@Model.Job.Description</dd>
+
+        <dt>Complexity</dt>
+        <dd>@Model.Job.Complexity</dd>
+
+        <dt>Assign androids</dt>
+        @if (@Model.Androids.Count == 0)
+        {
+            <dd>Androids assign't</dd>
+        }
+        else
+        {
+            <dd>
+                <table class="table">
+                    <tr><td>Avatar</td><td>Name</td><td>Reability</td><td>Status</td></tr>
+                    @foreach (var p in Model.Androids)
+                    {
+                        <tr>
+                            @if (p.Avatar != null)
+                            {
+                                <td><img style='width:80px; height:60px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(p.Avatar))" /></td>
+                            }
+                            else
+                            {
+                                <td></td>
+                            }
+                            <td>@p.Name</td>
+                            <td>@p.Reability</td>
+                            <td>@p.Status</td>
+                            <td>
+                                <form asp-controller="Job" asp-action="Deactivate" asp-route-jobId="@Model.Job.Id" asp-route-androidId="@p.Id" method="post">
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-default" value="Deactivate" />
+                                    </div>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </dd>
+        }
+        <dd>
+            <a asp-action="Assign" asp-controller="Job" asp-route-id="@Model.Job.Id">Assign android</a>
+        </dd>
+    </dl>
+</div>

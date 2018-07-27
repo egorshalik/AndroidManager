@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ManagerAndroid.Models.Android>
+
+@{
+    ViewBag.Title = "Androids";
+}
+
+
+<table class="table">
+    <tr><td>Avatar</td><td>Name</td><td>Reability</td><td>Status</td></tr>
+    @foreach (var p in Model)
+    {
+        <tr>
+            @if (p.Avatar != null)
+            {
+                <td><img style='width:80px; height:60px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(p.Avatar))" /></td>
+            }
+            else
+            {
+                <td></td>
+            }
+            <td>@p.Name</td>
+            <td>@p.Reability</td>
+            <td>@p.Status</td>
+            <td>
+                <a asp-action="Android" asp-controller="Android" asp-route-id="@p.Id">Details</a> |
+                <a asp-action="Edit" asp-controller="Android" asp-route-id="@p.Id">Edit</a> |
+                <a asp-action="Delete" asp-controller="Android" asp-route-id="@p.Id">Delete</a>
+            </td>
+        </tr>
+    }
+</table>

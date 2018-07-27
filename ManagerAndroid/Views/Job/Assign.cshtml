@@ -1,0 +1,57 @@
+﻿@model ManagerAndroid.Models.JobViewModel
+
+@{
+    ViewBag.Title = "Assign android to job " + @Model.Job.Name;
+}
+
+<br />
+<form asp-controller="Job" asp-action="Job" asp-route-id="@Model.Job.Id">
+    <div class="form-group">
+        <input type="submit" class="btn btn-default" value="Back" />
+    </div>
+</form>
+
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <td>Name</td>
+        <td>@Model.Job.Name</td>
+        <td>Description</td>
+        <td>@Model.Job.Description</td>
+        <td>Complexity</td>
+        <td>@Model.Job.Complexity</td>
+    </tr>
+</table>
+
+<br />
+<br />
+<br />
+
+<table class="table">
+    <tr><td>Avatar</td><td>Name</td><td>Reability</td><td>Status</td></tr>
+    @foreach (var p in Model.Androids)
+    {
+        <tr>
+            @if (p.Avatar != null)
+            {
+                <td><img style='width:80px; height:60px;' src="data:image/jpeg;base64,@(Convert.ToBase64String(p.Avatar))" /></td>
+            }
+            else
+            {
+                <td></td>
+            }
+            <td>@p.Name</td>
+            <td>@p.Reability</td>
+            <td>@p.Status</td>
+            <td>
+                <form asp-controller="Job" asp-action="Assign" asp-route-jobId="@Model.Job.Id" asp-route-androidId="@p.Id" method="post">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-default" value="Assign" />
+                    </div>
+                </form>
+            </td>
+        </tr>
+    }
+</table>

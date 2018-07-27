@@ -1,0 +1,36 @@
+﻿@model ManagerAndroid.Models.Job
+
+@{
+    ViewBag.Title = "Edit job";
+}
+
+<br />
+<form asp-controller="Job" asp-action="Index">
+    <div class="form-group">
+        <input type="submit" class="btn btn-default" value="Back" />
+    </div>
+</form>
+
+<br />
+<br />
+
+<form asp-action="Edit" asp-controller="Job" method="post" asp-route-id="@Model.Id">
+    <div asp-validation-summary="ModelOnly"></div>
+    <p>
+        <label>Name</label>
+        <input name="Name" class="form-control" value="@Model.Name" />
+        <span asp-validation-for="Name"></span>
+    </p>
+    <p>
+        <label>Description</label>
+        <input name="Description" class="form-control" value="@Model.Description" />
+        <span asp-validation-for="Description"></span>
+    </p>
+    <p>
+        <label>Complexity</label>
+        <input name="Complexity" class="form-control" value="@Model.Complexity" />
+    </p>
+    <p>
+        <input type="submit" value="Edit" />
+    </p>
+</form>

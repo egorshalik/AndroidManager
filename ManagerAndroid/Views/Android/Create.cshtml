@@ -1,0 +1,34 @@
+﻿@model ManagerAndroid.Models.AndroidViewModel
+
+@{
+    ViewBag.Title = "Add android";
+}
+
+<br />
+<form asp-controller="Android" asp-action="Index">
+    <div class="form-group">
+        <input type="submit" class="btn btn-default" value="Back" />
+    </div>
+</form>
+
+<br />
+<br />
+<form asp-action="Create" asp-controller="Android" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly"></div>
+    <p>
+        <label>Name</label>
+        <input name="Name" class="form-control" />
+        <span asp-validation-for="Name"></span>
+    </p>
+    <p>
+        <label>Avatar</label>
+        <input name="Avatar" type="file" class="form-control" />
+    </p>
+    <p>
+        <label>Skills</label>
+        <input name="Skills" class="form-control" />
+    </p>
+    <p>
+        <input type="submit" value="Create" />
+    </p>
+</form>
